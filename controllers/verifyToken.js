@@ -6,10 +6,10 @@ const verifyToken = (req, res, next) => {
     if(!token) {
         return res.status(401).send({ auth: false, message: "No token provided" });
     }
-    // const decode = await jwt.verify(token, config.secret);
-    // req.userId = decode.id;
+    const decode = await jwt.verify(token, config.secret);
+    req.userId = decode.id;
 
-    // next();
+    next();
 }
 
 module.exports = verifyToken;
