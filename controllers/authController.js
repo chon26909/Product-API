@@ -7,7 +7,7 @@ const verifyToken = require("../controllers/verifyToken");
 const jwt = require("jsonwebtoken");
 const config = require("../config");
 
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
     try {
         const { username, email, password } = req.body;
 
@@ -36,7 +36,7 @@ router.post("/signup", (req, res) => {
     }
 });
 
-router.post("/signin", (req, res) => {
+router.post("/signin", async(req, res) => {
     try {
         const user = await User.findOne({email: req.body.email})
         if (!user) {
