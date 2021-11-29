@@ -36,24 +36,24 @@ router.post("/signup", (req, res) => {
     }
 });
 
-// router.post("/signin", (req, res) => {
-//     try {
-//         const user = await User.findOne({email: req.body.email})
-//         if (!user) {
-//             return res.status(404).send("The email doesn't exist");
-//         }
+router.post("/signin", (req, res) => {
+    try {
+        const user = await User.findOne({email: req.body.email})
+        if (!user) {
+            return res.status(404).send("The email doesn't exist");
+        }
 
-//         const validPassword = await (req.body.password, user.password);
-//         if (!validPassword) {
-//             return res.status(401).send({auth: false, token:null})
-//         }
-//         const token = jwt.sign({ id: user._id }, config.secret, { expiresIn: "1h"})
-//         res.status(200).json({ auth: true, token: token });
-//     } catch (error) {
-//         console.log(error)
-//         res.status(500).send("There is a problem")
-//     }
-// })
+        const validPassword = await (req.body.password, user.password);
+        if (!validPassword) {
+            return res.status(401).send({auth: false, token:null})
+        }
+        const token = jwt.sign({ id: user._id }, config.secret, { expiresIn: "1h"})
+        res.status(200).json({ auth: true, token: token });
+    } catch (error) {
+        console.log(error)
+        res.status(500).send("There is a problem")
+    }
+})
 
 // router.get("/logout", (req, res) => {
 //     res.status(200).json({ auth: false, token: null })
