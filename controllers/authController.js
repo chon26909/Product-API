@@ -44,7 +44,7 @@ router.post("/signin", async(req, res) => {
             return res.status(404).send("The email doesn't exist");
         }
 
-        const validPassword = await user.validPassword(req.body.password, user.password);
+        const validPassword = await user.validatePassword(req.body.password, user.password);
         if (!validPassword) {
             return res.status(401).send({auth: false, token:null})
         }
